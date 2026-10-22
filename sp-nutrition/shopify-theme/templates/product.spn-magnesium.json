@@ -1,0 +1,10 @@
+{
+  "layout": "spn-landing",
+  "sections": {
+    "main": {
+      "type": "spn-magnesium-page",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
