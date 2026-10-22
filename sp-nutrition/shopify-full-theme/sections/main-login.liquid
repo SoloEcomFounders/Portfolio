@@ -1,0 +1,21 @@
+<h1>Log in</h1>
+{%- form 'customer_login', class: 'form' -%}
+  {{ form.errors | default_errors }}
+  <label for="CustomerEmail">Email</label>
+  <input type="email" name="customer[email]" id="CustomerEmail" autocomplete="email">
+  <label for="CustomerPassword">Password</label>
+  <input type="password" name="customer[password]" id="CustomerPassword" autocomplete="current-password">
+  <button class="btn" type="submit">Sign in</button>
+  <a href="{{ routes.account_register_url }}">Create account</a>
+{%- endform -%}
+<h2 style="margin-top:32px">Reset your password</h2>
+{%- form 'recover_customer_password', class: 'form' -%}
+  {%- if form.posted_successfully? -%}<p>We've sent you an email with a link to update your password.</p>{%- endif -%}
+  {{ form.errors | default_errors }}
+  <label for="RecoverEmail">Email</label>
+  <input type="email" name="email" id="RecoverEmail" autocomplete="email">
+  <button class="btn secondary" type="submit">Send reset link</button>
+{%- endform -%}
+{% schema %}
+{ "name": "Login", "settings": [] }
+{% endschema %}

@@ -1,0 +1,23 @@
+<h1>Search</h1>
+<form action="{{ routes.search_url }}" method="get" class="form" role="search">
+  <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search" aria-label="Search">
+  <button class="btn" type="submit">Search</button>
+</form>
+{%- if search.performed -%}
+  {%- paginate search.results by 24 -%}
+    <p class="muted" style="margin-top:20px">{{ search.results_count }} results</p>
+    <div class="grid">
+      {%- for item in search.results -%}
+        {%- if item.object_type == 'product' -%}
+          {%- render 'product-card', product: item -%}
+        {%- else -%}
+          <a class="card" href="{{ item.url }}"><div class="info"><span>{{ item.title }}</span></div></a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}<div class="pagination">{{ paginate | default_pagination }}</div>{%- endif -%}
+  {%- endpaginate -%}
+{%- endif -%}
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

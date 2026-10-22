@@ -1,0 +1,13 @@
+<h2 style="margin-top:40px">{{ section.settings.heading }}</h2>
+<div class="grid">
+  {%- for product in collections.all.products limit: 8 -%}
+    {%- render 'product-card', product: product -%}
+  {%- endfor -%}
+</div>
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [{ "type": "text", "id": "heading", "label": "Heading", "default": "Shop" }],
+  "presets": [{ "name": "Featured products" }]
+}
+{% endschema %}

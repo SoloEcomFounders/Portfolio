@@ -1,0 +1,24 @@
+<h1>Addresses</h1>
+<p><a href="{{ routes.account_url }}">Back to account</a></p>
+{%- for address in customer.addresses -%}
+  <div style="border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px">
+    {%- if address == customer.default_address -%}<strong>Default</strong>{%- endif -%}
+    {{ address | format_address }}
+  </div>
+{%- endfor -%}
+<h2>Add a new address</h2>
+{%- form 'customer_address', customer.new_address, class: 'form' -%}
+  {{ form.errors | default_errors }}
+  <label for="AddrFirst">First name</label><input type="text" id="AddrFirst" name="address[first_name]" autocomplete="given-name">
+  <label for="AddrLast">Last name</label><input type="text" id="AddrLast" name="address[last_name]" autocomplete="family-name">
+  <label for="AddrAddress1">Address</label><input type="text" id="AddrAddress1" name="address[address1]" autocomplete="address-line1">
+  <label for="AddrCity">City</label><input type="text" id="AddrCity" name="address[city]" autocomplete="address-level2">
+  <label for="AddrCountry">Country</label><select id="AddrCountry" name="address[country]">{{ all_country_option_tags }}</select>
+  <label for="AddrProvince">Province / State</label><input type="text" id="AddrProvince" name="address[province]" autocomplete="address-level1">
+  <label for="AddrZip">Postal code</label><input type="text" id="AddrZip" name="address[zip]" autocomplete="postal-code">
+  <label><input type="checkbox" name="address[default]" value="1" style="width:auto"> Set as default</label>
+  <button class="btn" type="submit">Add address</button>
+{%- endform -%}
+{% schema %}
+{ "name": "Addresses", "settings": [] }
+{% endschema %}

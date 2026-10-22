@@ -1,0 +1,33 @@
+<h1>Your cart</h1>
+{%- if cart.item_count > 0 -%}
+  <form action="{{ routes.cart_url }}" method="post">
+    <table class="simple">
+      <thead><tr><th>Product</th><th>Quantity</th><th>Total</th></tr></thead>
+      <tbody>
+        {%- for item in cart.items -%}
+          <tr class="cart-line">
+            <td>
+              <div style="display:flex;gap:12px;align-items:center">
+                {%- if item.image -%}{{ item.image | image_url: width: 150 | image_tag: alt: item.title }}{%- endif -%}
+                <div><a href="{{ item.url }}">{{ item.product.title }}</a>{% unless item.variant.title == 'Default Title' %}<div class="muted">{{ item.variant.title }}</div>{% endunless %}</div>
+              </div>
+            </td>
+            <td><input class="qty" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity"></td>
+            <td>{{ item.final_line_price | money }}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    <p style="text-align:right;font-size:20px;font-weight:700">Subtotal: {{ cart.total_price | money }}</p>
+    <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap">
+      <button class="btn secondary" type="submit" name="update">Update cart</button>
+      <button class="btn" type="submit" name="checkout">Check out</button>
+    </div>
+  </form>
+{%- else -%}
+  <p class="muted">Your cart is empty.</p>
+  <a class="btn" href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+{%- endif -%}
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

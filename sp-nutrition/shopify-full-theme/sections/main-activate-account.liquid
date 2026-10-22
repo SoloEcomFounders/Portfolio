@@ -1,0 +1,11 @@
+<h1>Activate account</h1>
+{%- form 'activate_customer_password', class: 'form' -%}
+  {{ form.errors | default_errors }}
+  <label for="ActPassword">Password</label><input type="password" name="customer[password]" id="ActPassword" autocomplete="new-password">
+  <label for="ActConfirm">Confirm password</label><input type="password" name="customer[password_confirmation]" id="ActConfirm" autocomplete="new-password">
+  <button class="btn" type="submit" name="activate">Activate account</button>
+  <button class="btn secondary" type="submit" name="decline">Decline invitation</button>
+{%- endform -%}
+{% schema %}
+{ "name": "Activate account", "settings": [] }
+{% endschema %}

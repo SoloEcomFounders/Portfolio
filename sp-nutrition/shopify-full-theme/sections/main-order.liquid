@@ -1,0 +1,15 @@
+<h1>Order {{ order.name }}</h1>
+<p class="muted">Placed on {{ order.created_at | date: '%B %d, %Y' }}</p>
+<table class="simple">
+  <thead><tr><th>Product</th><th>Quantity</th><th>Total</th></tr></thead>
+  <tbody>
+    {%- for line_item in order.line_items -%}
+      <tr><td>{{ line_item.title }}</td><td>{{ line_item.quantity }}</td><td>{{ line_item.final_line_price | money }}</td></tr>
+    {%- endfor -%}
+  </tbody>
+</table>
+<p style="text-align:right;font-weight:700">Total: {{ order.total_price | money }}</p>
+{%- if order.shipping_address -%}<h2>Shipping address</h2>{{ order.shipping_address | format_address }}{%- endif -%}
+{% schema %}
+{ "name": "Order", "settings": [] }
+{% endschema %}

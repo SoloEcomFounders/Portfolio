@@ -1,0 +1,11 @@
+<a class="card" href="{{ product.url }}">
+  <div class="media">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
+    {%- endif -%}
+  </div>
+  <div class="info">
+    <span>{{ product.title }}</span>
+    <span class="price">{{ product.price | money }}</span>
+  </div>
+</a>

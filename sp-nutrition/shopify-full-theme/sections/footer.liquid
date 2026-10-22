@@ -1,0 +1,14 @@
+<footer class="site-footer">
+  <div class="inner">
+    <strong style="font-size:24px">{{ shop.name }}</strong>
+    <div class="links">
+      {%- for link in linklists['footer'].links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      {%- for policy in shop.policies -%}<a href="{{ policy.url }}">{{ policy.title }}</a>{%- endfor -%}
+    </div>
+    <small>*These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure or prevent any disease.</small>
+    <small>© {{ 'now' | date: '%Y' }} {{ shop.name }}</small>
+  </div>
+</footer>
+{% schema %}
+{ "name": "Footer", "settings": [] }
+{% endschema %}

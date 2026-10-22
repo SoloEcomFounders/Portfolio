@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "index-hero", "settings": {} },
+    "products": { "type": "featured-products", "settings": {} }
+  },
+  "order": ["hero", "products"]
+}
